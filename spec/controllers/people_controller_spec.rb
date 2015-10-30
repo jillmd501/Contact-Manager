@@ -28,13 +28,15 @@ RSpec.describe PeopleController, type: :controller do
     }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { first_name: nil, last_name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # PeopleController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+
+
 
   describe "GET #index" do
     it "assigns all people as @people" do
@@ -100,18 +102,19 @@ RSpec.describe PeopleController, type: :controller do
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
+  describe "PUT update" do
+    describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {first_name: 'NewFirstName', last_name: 'NewLastName'}
       }
 
       it "updates the requested person" do
-        person = Person.create! valid_attributes
-        put :update, {:id => person.to_param, :person => new_attributes}, valid_session
-        person.reload
-        skip("Add assertions for updated state")
-      end
+    person = Person.create! valid_attributes
+    put :update, {:id => person.to_param, :person => new_attributes}, valid_session
+    person.reload
+    expect(person.first_name).to eq('NewFirstName')
+    expect(person.last_name).to eq('NewLastName')
+  end
 
       it "assigns the requested person as @person" do
         person = Person.create! valid_attributes
