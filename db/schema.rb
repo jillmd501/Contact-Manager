@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20151031213855) do
 
+  create_table "companies", force: :cascade do |t|
+      t.text     "name"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+    end
+
   create_table "email_addresses", force: :cascade do |t|
     t.string   "address"
     t.integer  "person_id"
